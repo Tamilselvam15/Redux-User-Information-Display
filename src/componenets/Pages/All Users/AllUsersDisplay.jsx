@@ -1,18 +1,34 @@
-/* eslint-disable react/prop-types */
 import './AllUsersDisplay.css'
 import { Table,Button } from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getUserData } from '../../slice/userSlicer';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios'
+import { getUserData, setAllUsersData } from '../../slice/userSlicer';
+import { useEffect } from 'react';
 
-const AllUsersDisplay = ({ userData }) => {
+const AllUsersDisplay = () => {
   const dispatch=useDispatch()
   const navigate = useNavigate()
   const searchUser = async(id) => {
     dispatch(getUserData(id));
     navigate(`/Users/${id}`)
   }
+
+
+  const apiCall = async () => {
+    try {
+          const response = await axios.get("https://jsonplaceholder.typicode.com/users")
+       dispatch(setAllUsersData(response.data))
+    } catch (error) {
+      console.error(`Error Fetching user Data :${error}`)
+    }
+  }
+  const Fetching = useSelector((state) => state.userInfo.allUserData);
+
+  useEffect(() => {
+    apiCall()
+  },[])
 
 
   return (
@@ -28,7 +44,7 @@ const AllUsersDisplay = ({ userData }) => {
             </tr>
           </thead>
           <tbody>
-            {userData.map((user, index) => (
+            {Fetching.map((user, index) => (
               <tr key={index}>
                 <td>{user.id}</td>
                 <td>{user.name}</td>

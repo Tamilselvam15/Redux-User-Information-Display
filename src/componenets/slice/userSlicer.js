@@ -2,8 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     allUserData: [],
-    selectedUser:null
+    selectedUser: null,
+    
+    
 }
+
+
+
 
 const userSlice = createSlice({
     name: 'usersdata',
@@ -16,7 +21,9 @@ const userSlice = createSlice({
         getUserData: (state, action) => {
             state.selectedUser=state.allUserData.find((user=>user.id===action.payload))
         }
-    }
+    },
+
+   
 })
 
 export const { getUserData,setAllUsersData } = userSlice.actions;

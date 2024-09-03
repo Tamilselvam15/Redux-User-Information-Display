@@ -5,7 +5,6 @@ const Information =  () =>  {
   const allUserData = useSelector((state) => state.userInfo.allUserData)
   const {id}= useParams()
   const Information = allUserData.find((user) => user.id === Number(id))
-  console.log(Information)
   
 
       return (
