@@ -1,0 +1,25 @@
+.user-Container {
+    width: 100%;
+    height: 85vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    border-radius: 5px;
+    background-color: antiquewhite;
+    border: solid rgb(23, 3, 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-table {
+    width: 80%;
+
+}
+
+.view-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

@@ -1,0 +1,27 @@
+#root {
+  margin: 0 auto;
+  padding: 0;
+  border: solid black;
+  box-sizing: border-box;
+  background-color: black;
+}
+
+.container{
+  width:100% ;
+  height: 100vh;
+}
+
+@media (min-width:989px) and (min-width:930px)and(min-width:769px) and (min-width:700px) and (min-width:650px) and (min-width:600px) and (min-width:879px) and (min-width:820px)and(min-width:1250px){
+  .container {
+      width: 100%;
+      height: 100vh;
+    }
+
+        #root {
+          margin: 0 auto;
+          padding: 0;
+          border: solid black;
+          box-sizing: border-box;
+          background-color: black;
+        }
+}
