@@ -1,0 +1,71 @@
+.add-container{
+  width: 50%;
+  height: 80vh;
+  /* border: solid black; */
+  position: absolute;
+  z-index:1;
+  display: flex;
+  border-radius: 30px;
+  flex-direction: column;
+  background-color: rgb(9, 133, 100);
+  align-items: center;
+  box-shadow: 0px 2px 50px black;
+  justify-content: center;
+}
+.form-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    height: 90vh;
+    align-items: center;
+    /* border: solid black; */
+    gap: 20px;
+
+}
+.tilte{
+    width: 90%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: aliceblue;
+    font-weight: 600;
+}
+.add-button{
+    /* margin-top: 15px; */
+    width: 150px;
+    border: solid 3px red;
+
+}
+.basic-details{
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(2,45% );
+    grid-template-rows: repeat(1.5, 50px);
+    gap: 30px;
+    width: 100%;
+}
+.Address-details{
+    display: grid;
+    grid-template-columns: repeat(2, 45%);
+    grid-template-rows: repeat(1.5, 50px);
+    justify-content: space-evenly;
+    gap: 10px;
+    width: 100%;
+}
+
+.Company-details{
+    display: grid;
+    width: 100%;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(2, 45%);
+    grid-template-rows: repeat(1.5, 50px);
+    gap: 30px;
+}
+.input1{
+    background-color:bisque;
+    border-radius: 5px;
+    height: 5vh;
+    font-style: italic;
+    color: black;
+
+
+}

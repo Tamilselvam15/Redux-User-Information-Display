@@ -1,41 +1,62 @@
 import './AllUsersDisplay.css'
-import { Table,Button } from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Table,Button } from 'reactstrap'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios'
-import { getUserData, setAllUsersData } from '../../slice/userSlicer';
-import { useEffect } from 'react';
+import { getUserData, apiCall } from '../../slice/userSlicer';
+import { useEffect,useState } from 'react';
+import AddComponent from '../../AddModel/AddComponent';
 
 const AllUsersDisplay = () => {
-  const dispatch=useDispatch()
-  const navigate = useNavigate()
-  const searchUser = async(id) => {
+  const [open, setOpen] = useState(false)
+  const[refresh,setRefresh]=useState(false)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const searchUser = (id) => {
     dispatch(getUserData(id));
-    navigate(`/Users/${id}`)
+    navigate(`/Users/${id}`);
   }
 
-
-  const apiCall = async () => {
-    try {
-          const response = await axios.get("https://jsonplaceholder.typicode.com/users")
-       dispatch(setAllUsersData(response.data))
-    } catch (error) {
-      console.error(`Error Fetching user Data :${error}`)
-    }
+  const close = (close) => {
+    setOpen(close)
   }
-  const Fetching = useSelector((state) => state.userInfo.allUserData);
+
+  const Fetching = useSelector((state) => state.userInfo.allUserData)
+  const status = useSelector((state) => state.userInfo.status)
+  const Error = useSelector((state) => state.userInfo.error)
+  const fetchSearchedUser=useSelector((state)=>state.userInfo.searchedUser)
+
+  
 
   useEffect(() => {
-    apiCall()
-  },[])
+    dispatch(apiCall())
+    if (refresh) {
 
+      dispatch(apiCall())
+      setRefresh(false) 
+
+    }
+  },[dispatch,refresh])
+
+  if (status === 'loading') {
+      return <p>loading......</p>
+  }
+
+  if (status === 'failed') {
+    return <p>Error:{ Error}</p>
+  }
+
+  const handleAdd = () => {
+    setOpen(true);
+  }
+ const usersToDisplay = fetchSearchedUser.length > 0 ? fetchSearchedUser : Fetching;
 
   return (
     <div className='user-Container'>
+      <button className='refresh-button' onClick={()=>setRefresh(true)}>Refresh</button>
       <div className='user-table'>
-        <Table   hover>
-          <thead>
+        <Table hover className='tables'>
+            <thead className='table-header'>
             <tr>
               <th>id</th>
               <th>name</th>
@@ -44,7 +65,7 @@ const AllUsersDisplay = () => {
             </tr>
           </thead>
           <tbody>
-            {Fetching.map((user, index) => (
+            {usersToDisplay.map((user, index) => (
               <tr key={index}>
                 <td>{user.id}</td>
                 <td>{user.name}</td>
@@ -53,11 +74,16 @@ const AllUsersDisplay = () => {
               </tr>
             ))}
           </tbody>
+         
 
         </Table>
-      </div>
-     
 
+        
+      </div>
+             <Button color='danger' className='Add-Button' onClick={handleAdd}>Add Users</Button>
+              {open && <AddComponent close={close} />}
+        
+    
     </div>
   )
 }
