@@ -12,7 +12,12 @@
     border: solid rgb(23, 3, 3);
 }
 
-.button{
+/* .button{
     width: 200px;
     height: 8vh;
+} */
+h1{
+    color: blue;
+    font-size: 30px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
